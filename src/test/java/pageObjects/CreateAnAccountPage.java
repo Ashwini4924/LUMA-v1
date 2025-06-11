@@ -1,48 +1,55 @@
 package pageObjects;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CreateAnAccountPage {
-	
-	public class RegisterPage {
+
 	    WebDriver driver;
+	    WebDriverWait wait;
 	
-	    public RegisterPage(WebDriver driver) {
+	    public CreateAnAccountPage(WebDriver driver) {
 	        this.driver = driver;
+	        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    }
 	    
-	    @FindBy(xpath="//input[@id='firstname']") WebElement txtFirstname;
-	    @FindBy(xpath="//input[@id='lastname']") WebElement txtLastname;
-	    @FindBy(xpath="//input[@id='email_address']") WebElement txtEmail;
-	    @FindBy(xpath="//input[@id='password']") WebElement txtPassword;
-	    @FindBy(xpath="//input[@id='password-confirmation']") WebElement txtConfirmPassword;
-	    @FindBy(xpath="//button[@title='Create an Account']//span[contains(text(),'Create an Account')]") WebElement btnCreateanAccount;
+	    //Locators
+	    By txtFirstname = By.xpath("//input[@id='firstname']");
+	    By txtLastname = By.xpath("//input[@id='lastname']");
+	    By txtEmail = By.xpath("//input[@id='email_address']");
+	    By txtPassword = By.xpath("//input[@id='password']");
+	    By txtConfirmPassword = By.xpath("//input[@id='password-confirmation']");
+	    By btnCreateanAccount = By.xpath("//button[@title='Create an Account']//span[contains(text(),'Create an Account')]");
 	    
+	    //Actions
 	    public void enterFirstName(String fname) {
-	       txtFirstname.sendKeys(fname);
+	       wait.until(ExpectedConditions.visibilityOfElementLocated(txtFirstname)).sendKeys(fname);
 	    }
 
 	    public void enterLastName(String lname) {
-	        txtLastname.sendKeys(lname);
+	    	wait.until(ExpectedConditions.visibilityOfElementLocated(txtLastname)).sendKeys(lname);
 	    }
 
 	    public void enterEmail(String email) {
-	        txtEmail.sendKeys(email);
+	    	wait.until(ExpectedConditions.visibilityOfElementLocated(txtEmail)).sendKeys(email);
 	    }
 
 	    public void enterPassword(String pwd) {
-	        txtPassword.sendKeys(pwd);
+	    	wait.until(ExpectedConditions.visibilityOfElementLocated(txtPassword)).sendKeys(pwd);
 	    }
 
 	    public void enterConfirmPassword(String pwd) {
-	    	txtConfirmPassword.sendKeys(pwd);
+	    	wait.until(ExpectedConditions.visibilityOfElementLocated(txtConfirmPassword)).sendKeys(pwd);
 	    }
 
 	    public void clickCreateAccount() {
-	    	btnCreateanAccount.click();
+	    	wait.until(ExpectedConditions.visibilityOfElementLocated(btnCreateanAccount)).click();
 	    }
 	    
-	}
 }
